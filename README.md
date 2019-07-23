@@ -49,3 +49,6 @@ After the PR is approved and the magic words `atlantis apply` are invoked in the
 
 This whole 'cookie cutter' could be re-used multiple times, providing individual teams, organizations, companies, etc with therir very own, personalized KaaS.
 
+## Notes
+
+The project has been modified to protect confidential information and the AWS account that backed the project no longer exists
