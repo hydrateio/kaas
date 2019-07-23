@@ -1,0 +1,40 @@
+version: 2
+projects:
+- name: main
+  dir: ./main/
+  apply_requirements: [mergeable, approved]
+  autoplan:
+    when_modified: ["../*.tf", "*.tf", "secrets.json"]
+    enabled: true
+  workflow: default
+- name: atlantis
+  dir: ./atlantis/
+  apply_requirements: [mergeable, approved]
+  autoplan:
+    when_modified: ["../*.tf", "*.tf", "secrets.json"]
+    enabled: true
+  workflow: default
+- name: rancher
+  dir: ./rancher/
+  apply_requirements: [mergeable, approved]
+  autoplan:
+    when_modified: ["../*.tf", "*.tf", "secrets.json"]
+    enabled: true
+  workflow: default
+- name: clusters
+  dir: ./clusters/
+  apply_requirements: [mergeable, approved]
+  autoplan:
+    when_modified: ["../*.tf", "*.tf"]
+    enabled: true
+  workflow: default
+workflows:
+  default:
+    plan:
+      steps:
+      - run: terraform init -input=false -no-color
+      - run: eval $(../scripts/aws_secrets.sh) && terraform plan -input=false -refresh -no-color -out \"${PLANFILE}\"
+    apply:
+      steps:
+      - run: terraform init -input=false -no-color
+      - run: eval $(../scripts/aws_secrets.sh) && terraform apply -input=false -refresh -no-color \"${PLANFILE}\"
