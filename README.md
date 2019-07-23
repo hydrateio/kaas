@@ -25,7 +25,7 @@ In addition, we deploy [atlantis](http://runatlantis.io) into our AWS account us
 
 ## Request a k8s cluster... using a pull request
 
-At this point, we have atlantis listenting for changes to our infracode. 
+At this point, we have atlantis listening for changes to our infracode. 
 
 To request a new kubernetes cluster, provisioned by our rancher cluster manager we'd create a PR with this addition to the 'clusters' directory:
 
